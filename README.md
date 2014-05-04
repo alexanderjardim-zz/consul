@@ -1,31 +1,42 @@
-Role Name
+consul
 ========
 
-A brief description of the role goes here.
+Consul is a tool for discovering and configuring services in your infrastructure. Much like Smart Stack from airbnb.com, but it promises to be simpler. This ansible roles aims to help instalation and configuration of Consul.
+
+> http://www.consul.io/intro/index.html
+
+You must keep in my mind three things when you use my roles:
+
+1. All my roles make the assumption that host machines don't have internet connection, as this is the standard behavior of production machines in most companies. So, all the necessary dependencies will be downloaded to the control machine and after that pushed to the host machines. Keep in mind that you will need disk space for these downloads on your control machine.
+1. I try to not use any package manager, at all. This way, you will not depend on more than one maintainer for the same software (the software original writer, and the package management team). Going this way, it is your choice to install using root or not. Which I always advise to don't use, if you can.
+1. I try to keep all of my roles free from sudo or root access. If you wan't to use root, it is choice and not an specific demand, and I will keep this way as long as I can.
+
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+unzip
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- **consul_version:** default to _'0.2.0'_
+- **consul_download_dir:** download path on control machine. defaults to _'/tmp'_
+- **consul_instalation_dir:** consul instalation path at host machines. defaults to  _'/home/vagrant/consul'_
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+none
 
 Example Playbook
 -------------------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+```
+    - hosts: all
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: alexanderjardim.consul }
+```
 
 License
 -------
@@ -35,4 +46,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+alexander.ramos.jardim+consul@gmail.com
