@@ -1,0 +1,4 @@
+consul
+======
+
+Consul ansible role.
