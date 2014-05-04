@@ -1,0 +1,38 @@
+---
+# tasks file for consul
+- name: downloads Consul package
+  local_action: >
+    get_url
+      url="https://dl.bintray.com/mitchellh/consul/{{consul_version}}_linux_amd64.zip"
+      dest="{{consul_download_dir}}"
+  tags: download
+
+- name: ensires {{consul_instalation_dir}} exists
+  file:
+    path="{{consul_instalation_dir}}"
+    mode=0700
+    state=directory
+
+- name: unpacks Consul to {{consul_instalation_dir}}
+  unarchive:
+    src="{{consul_download_dir}}/{{consul_version}}_linux_amd64.zip"
+    dest="{{consul_instalation_dir}}"
+  tags: unpack
+
+- name: ensures consul command has the right permissions
+  file:
+    path="{{consul_instalation_dir}}/consul"
+    mode=0700
+    state=file
+
+- name: ensures consul command is in the PATH
+  notify:
+    - restart consul
+  lineinfile:
+    dest=~/.bashrc
+    line="export PATH={{consul_instalation_dir}}:$PATH"
+    state=present
+    insertafter=EOF
+    create=true
+
+

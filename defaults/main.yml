@@ -1,0 +1,5 @@
+---
+# defaults file for consul
+consul_version: 0.2.0
+consul_download_dir: '/tmp'
+consul_instalation_dir: '/home/vagrant/consul'

@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  tasks:
+  - name: installs unzip
+    apt: pkg=unzip update_cache=yes cache_valid_time=900000
+    sudo: yes
+  roles:
+  - { role: 'consul' }

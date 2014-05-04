@@ -1,0 +1,6 @@
+---
+# handlers file for consul
+#- name: restart consul
+#  command:
+#    chdir="{{consul_instalation_dir}}"
+#    ./consul agent -server -bootstrap -data-dir /tmp/consul
